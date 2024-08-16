@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DescriptionBar from '@/components/DescriptionBar';
-import { AWS_TEMPLATES, IGraphBuilder, ITemplate } from '@/templates/aws';
+import { AWS_TEMPLATES, ITemplate } from '@/templates/aws';
 import { useRouter } from 'next/router';
 import { useAppDispatch } from '@/redux/hooks';
 import {
@@ -76,27 +74,10 @@ function ArchitectureOption({
 }
 
 const BuildPage = () => {
-  // TODO: Replace input state with useRef
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [showRecommendations, setShowRecommendations] = useState(true);
   const [userCount, setUserCount] = useState(0);
-
-  const handleSend = async () => {
-    setIsLoading(true);
-    // For demo build, simulate loading instead of calling the API
-    setTimeout(() => {
-      setShowRecommendations(true);
-      setIsLoading(false);
-    }, 50);
-  };
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <div className="flex flex-col items-center justify-center min-w-full">
-        {isLoading ? (
-          <span className="loading loading-spinner loading-xs text-spurple" />
-        ) : showRecommendations ? (
           <div className="fade-in">
             <h1 className="text-6xl font-custom m-5 text-center text-white">
               Our Recommendations
@@ -125,21 +106,6 @@ const BuildPage = () => {
               />
             </div>
           </div>
-        ) : (
-          <>
-            <h1 className="text-6xl font-custom m-5 text-center text-white">
-              What's your tech stack?
-            </h1>
-            <div className="flex flex-col my-2 w-full sm:w-full md:w-full lg:w-full">
-              <DescriptionBar
-                input={input}
-                setInput={setInput}
-                handleSend={handleSend}
-              />
-            </div>
-            <div className="mt-4" />
-          </>
-        )}
       </div>
     </div>
   );
