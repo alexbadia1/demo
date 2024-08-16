@@ -84,26 +84,11 @@ const BuildPage = () => {
 
   const handleSend = async () => {
     setIsLoading(true);
-    try {
-      const response = await fetch('/api/gpthandler', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userInput: input }),
-      });
-
-      const data = await response.json();
-      if (data.using_react && !data.using_backend) {
-        setShowRecommendations(true);
-      } else {
-        toast.error(
-          'Your stack is currently unsupported. As of now, we only support static sites like React and plain HTML/CSS.'
-        );
-      }
-    } finally {
+    // For demo build, simulate loading instead of calling the API
+    setTimeout(() => {
+      setShowRecommendations(true);
       setIsLoading(false);
-    }
+    }, 50);
   };
 
   return (
